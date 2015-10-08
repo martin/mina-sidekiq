@@ -115,6 +115,7 @@ namespace :sidekiq do
       queue %{
         cd "#{deploy_to}/#{current_path}"
         #{echo_cmd %[#{sidekiq} -d -e #{rails_env} -C #{sidekiq_config} -c #{sidekiq_concurrency} -i #{idx} -P #{pid_file} -L #{sidekiq_log}] }
+        sleep 3
       }
     end
   end
