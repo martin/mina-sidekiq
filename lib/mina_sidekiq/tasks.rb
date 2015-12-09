@@ -113,7 +113,7 @@ namespace :sidekiq do
     for_each_process do |pid_file, idx|
       queue %{
         cd "#{deploy_to}/#{current_path}"
-        #{echo_cmd %[#{sidekiq} -d -e #{rails_env} -C #{sidekiq_config} #{"-c #{sidekiq_concurrency} " if sidekiq_concurrency}-i #{idx} -P #{pid_file} -L #{sidekiq_log}] }
+        #{echo_cmd %[bash -l -c '#{sidekiq} -d -e #{rails_env} -C #{sidekiq_config} #{"-c #{sidekiq_concurrency} " if sidekiq_concurrency}-i #{idx} -P #{pid_file} -L #{sidekiq_log}'] }
         sleep 3
       }
     end
